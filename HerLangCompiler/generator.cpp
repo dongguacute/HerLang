@@ -45,6 +45,15 @@ static void gen_stmt(std::ostringstream& out, const std::shared_ptr<Statement>& 
     else if (auto set = dynamic_cast<SetStatement*>(stmt.get())) {
         out << ind << "auto " << set->var << " = 0;\n";
     }
+    else if (auto loop = dynamic_cast<ForStatement*>(stmt.get())) {
+        out << ind << "for (int " << loop->var << " = " << loop->start
+            << "; " << loop->var << " <= " << loop->end
+            << "; ++" << loop->var << ") {\n";
+        for (const auto& body_stmt : loop->body) {
+            gen_stmt(out, body_stmt, indent_level + 1);
+        }
+        out << ind << "}\n";
+    }
     else if (auto func = dynamic_cast<FunctionDef*>(stmt.get())) {
         if (!func->param.empty()) {
             out << "void " << func->name << "(auto " << func->param << ") {\n";

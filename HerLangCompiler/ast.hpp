@@ -45,6 +45,16 @@ struct FunctionDef : public Statement {
         : name(name), param(param), body(body) {}
 };
 
+struct ForStatement : public Statement {
+    std::string var;
+    int start;
+    int end;
+    std::vector<std::shared_ptr<Statement>> body;
+    ForStatement(const std::string& var, int start, int end,
+        const std::vector<std::shared_ptr<Statement>>& body)
+        : var(var), start(start), end(end), body(body) {}
+};
+
 struct StartBlock : public Statement {
     std::vector<std::shared_ptr<Statement>> body;
     StartBlock(const std::vector<std::shared_ptr<Statement>>& body)

@@ -1,8 +1,4 @@
-function you_can_do_this:
-    say "Hello! Her World!"
-    say "编程很美，也属于你！"
-end
-
-start:
-    you_can_do_this
+// 测试for循环
+for i from 1 to 5
+    say "当前数字是" i
 end
